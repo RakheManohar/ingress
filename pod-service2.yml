@@ -1,24 +1,25 @@
 kind: Pod
 apiVersion: v1
 metadata:
-  name: banana-app
+  name: httpd-app
   labels:
-    app: banana
+    app: httpd
 spec:
   containers:
-    - name: banana-app
-      image: hashicorp/http-echo
-      args:
-        - "-text=banana"
+  - name: httpd-app
+    image: httpd
+    ports:
+    - containerPort: 80
 
 ---
 
 kind: Service
 apiVersion: v1
 metadata:
-  name: banana-service
+  name: httpd-service
 spec:
   selector:
-    app: banana
+    app: httpd
   ports:
-    - port: 5678 # Default port for image
+  - port: 8580
+    targetPort: 80  
